@@ -19,6 +19,7 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="css/docson.css">
     <script src="lib/require.js"></script>
+    <script src="../schemas/schemas.js"></script>
     <script>
         require(["docson", "lib/jquery"], function(docson) {
             $(function () {
@@ -60,13 +61,8 @@
                                     typson.definitions(segments[0]).done(render);
                                 });
                             } else {
-                                $.get(segments[0])
-                                        .done(render)
-                                        .fail(function (xhr, status, err) {
-                                            error("Could not load " + segments[0].replace(/[\u00A0-\u9999<>\&]/gim, function(i) {
-                                                   return '&#'+i.charCodeAt(0)+';';
-                                            }) + ": " + status + " " + err);
-                                        });
+                                var resource = /\.\.\/schemas\/(\w+)\.json/g.exec(segments[0]);
+                            	render(schemas[resource[1]]);
                             }
                         }
                         function receiveMessage(event) {
