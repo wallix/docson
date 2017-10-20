@@ -37,7 +37,6 @@
                 $(window).on('hashchange', function () {
                     update();
                 });
-                update();
                 var url;
                 function update() {
                     if (window.location.hash) {
@@ -116,6 +115,7 @@
                         window.parent.postMessage( { id: "docson", action: "resized", url: url, width: width, height: height}, "*");
                     }
                 }
+                update();                
             });
         });
     </script>

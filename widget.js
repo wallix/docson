@@ -15,7 +15,7 @@
  */
 
 var scripts = document.getElementsByTagName('script');
-var script = scripts[ scripts.length - 1 ];
+var script = scripts[scripts.length - 1];
 
 if (script.attributes["data-schema"]) {
     var docson;
@@ -29,16 +29,14 @@ if (script.attributes["data-schema"]) {
         docson + "#" +
         script.attributes["data-schema"].value + "'></iframe>");
     function receiveMessage(event) {
-        console.log("<", event)
         if (event.data.id && event.data.id == "docson") {
-          var frame = document.getElementById(event.data.url);
-          if(event.data.action == "resized") {
-            frame.height = event.data.height + 18;
-          }
-          if(event.data.action == "ready") {
-            console.log(frame.parentNode)
-            frame.contentWindow.postMessage({ id: "docson", font: window.getComputedStyle(frame.parentNode).fontFamily}, "*");
-          }
+            var frame = document.getElementById(event.data.url);
+            if (event.data.action == "resized") {
+                frame.height = event.data.height + 18;
+            }
+            if (event.data.action == "ready") {
+                frame.contentWindow.postMessage({ id: "docson", font: window.getComputedStyle(frame.parentNode).fontFamily }, "*");
+            }
         }
 
     }
